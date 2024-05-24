@@ -7,16 +7,17 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 
-public class PantallaGameOver implements Screen {
+public class PantallaGameOver extends PantallaAbstracta{
 
-	private SpaceNavigation game;
-	private OrthographicCamera camera;
+	//private SpaceNavigation game;
+	//private OrthographicCamera camera;
 
 	public PantallaGameOver(SpaceNavigation game) {
-		this.game = game;
+		super(game);
+		//this.game = game;
         
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 1200, 800);
+		/*camera = new OrthographicCamera();
+		camera.setToOrtho(false, 1200, 800);*/
 	}
 
 	@Override
@@ -43,30 +44,6 @@ public class PantallaGameOver implements Screen {
 	
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void hide() {
 		// TODO Auto-generated method stub
 		
 	}

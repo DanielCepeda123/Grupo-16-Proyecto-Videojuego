@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 
 
 
-public class Nave4 {
+public class Nave4{
 	
 	private boolean destruida = false;
     private int vidas = 3;

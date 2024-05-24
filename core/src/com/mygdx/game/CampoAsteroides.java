@@ -55,4 +55,10 @@ public class CampoAsteroides {
 		balls1.remove(j);
 		balls2.remove(j);
 	}
+	
+	public void actualizarAsteroides() {
+		for (Ball2 ball : getBalls1()) {
+	          ball.update();
+	      }
+	}
 }

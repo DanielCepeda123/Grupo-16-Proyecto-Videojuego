@@ -13,10 +13,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
-public class PantallaJuego implements Screen {
+public class PantallaJuego extends PantallaAbstracta {
 
-	private SpaceNavigation game; //objeto game de clase SpaceNavigation
-	private OrthographicCamera camera;	
+	//private SpaceNavigation game; //objeto game de clase SpaceNavigation
+	//private OrthographicCamera camera;	
 	private SpriteBatch batch;
 	private int score; //puntaje
 	private int ronda; //cont de rondas
@@ -35,7 +35,8 @@ public class PantallaJuego implements Screen {
 
 	public PantallaJuego(SpaceNavigation game, int ronda, int vidas, int score,  
 			int velXAsteroides, int velYAsteroides, int cantAsteroides) {
-		this.game = game;
+		super(game);
+		//this.game = game;
 		this.ronda = ronda;
 		this.score = score;
 		this.velXAsteroides = velXAsteroides;
@@ -43,8 +44,8 @@ public class PantallaJuego implements Screen {
 		this.cantAsteroides = cantAsteroides;
 		
 		batch = game.getBatch();
-		camera = new OrthographicCamera();	
-		camera.setToOrtho(false, 800, 640);
+		/*camera = new OrthographicCamera();	
+		camera.setToOrtho(false, 800, 640);*/
 		//inicializar assets; musica de fondo y efectos de sonido
 		sonidos = new CoordinadorSonidos();
 		
@@ -58,7 +59,7 @@ public class PantallaJuego implements Screen {
         campoAsteroides = new CampoAsteroides(cantAsteroides, velXAsteroides, velYAsteroides);
         colisiones = new ManejoColisiones(campoAsteroides, balas, sonidos, score, nave, batch);
 	}
-    
+	
 	public void dibujaEncabezado() {
 		CharSequence str = "Vidas: "+nave.getVidas()+" Ronda: "+ronda;
 		game.getFont().getData().setScale(2f);		
@@ -81,9 +82,7 @@ public class PantallaJuego implements Screen {
 	    	  score = colisiones.colisionBalaAsteroide();
 	    	  
 		      //actualizar movimiento de asteroides dentro del area
-		      for (Ball2 ball : campoAsteroides.getBalls1()) {
-		          ball.update();
-		      }
+	    	  campoAsteroides.actualizarAsteroides();
 		      //colisiones entre asteroides y sus rebotes
 		      colisiones.colisionAsteroides(); 
 		      
@@ -129,30 +128,6 @@ public class PantallaJuego implements Screen {
 	public void show() {
 		// TODO Auto-generated method stub
 		sonidos.playGameMusic();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
