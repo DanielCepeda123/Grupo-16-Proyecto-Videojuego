@@ -36,7 +36,6 @@ public class ManejoColisiones {
               }   	  
   	        }
                 
-         //   b.draw(batch);
             if (bala.isDestroyed()) {
                 balas.remove(bala);
                 i--; //para no saltarse 1 tras eliminar del arraylist

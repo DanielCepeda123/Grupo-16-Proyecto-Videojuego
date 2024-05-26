@@ -14,9 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class PantallaJuego extends PantallaAbstracta {
-
-	//private SpaceNavigation game; //objeto game de clase SpaceNavigation
-	//private OrthographicCamera camera;	
+	
 	private SpriteBatch batch;
 	private int score; //puntaje
 	private int ronda; //cont de rondas
@@ -26,17 +24,13 @@ public class PantallaJuego extends PantallaAbstracta {
 	private CoordinadorSonidos sonidos;
 	private CampoAsteroides campoAsteroides;
 	private ManejoColisiones colisiones;
-	
 	private Nave4 nave;
-	//private  ArrayList<Ball2> balls1 = new ArrayList<>();
-	//private  ArrayList<Ball2> balls2 = new ArrayList<>();
 	private  ArrayList<Bullet> balas = new ArrayList<>();
 
 
 	public PantallaJuego(SpaceNavigation game, int ronda, int vidas, int score,  
 			int velXAsteroides, int velYAsteroides, int cantAsteroides) {
 		super(game);
-		//this.game = game;
 		this.ronda = ronda;
 		this.score = score;
 		this.velXAsteroides = velXAsteroides;
@@ -44,8 +38,6 @@ public class PantallaJuego extends PantallaAbstracta {
 		this.cantAsteroides = cantAsteroides;
 		
 		batch = game.getBatch();
-		/*camera = new OrthographicCamera();	
-		camera.setToOrtho(false, 800, 640);*/
 		//inicializar assets; musica de fondo y efectos de sonido
 		sonidos = new CoordinadorSonidos();
 		
@@ -64,8 +56,8 @@ public class PantallaJuego extends PantallaAbstracta {
 		CharSequence str = "Vidas: "+nave.getVidas()+" Ronda: "+ronda;
 		game.getFont().getData().setScale(2f);		
 		game.getFont().draw(batch, str, 10, 30);
-		game.getFont().draw(batch, "Score:"+this.score, Gdx.graphics.getWidth()-150, 30);
-		game.getFont().draw(batch, "HighScore:"+game.getHighScore(), Gdx.graphics.getWidth()/2-100, 30);
+		game.getFont().draw(batch, "Puntaje:"+this.score, Gdx.graphics.getWidth()-150, 30);
+		game.getFont().draw(batch, "Puntaje máximo:"+game.getHighScore(), Gdx.graphics.getWidth()/2-100, 30);
 	}
 	
 	@Override
@@ -112,7 +104,7 @@ public class PantallaJuego extends PantallaAbstracta {
 	      //nivel completado
 	      if (campoAsteroides.getBalls1Size()==0) {
 			Screen ss = new PantallaJuego(game,ronda+1, nave.getVidas(), score, 
-					velXAsteroides+3, velYAsteroides+3, cantAsteroides+10);
+					velXAsteroides+3, velYAsteroides+3, cantAsteroides+10); //Se aumenta la cantidad de asteroides y su velocidad.
 			ss.resize(1200, 800);
 			game.setScreen(ss);
 			dispose();

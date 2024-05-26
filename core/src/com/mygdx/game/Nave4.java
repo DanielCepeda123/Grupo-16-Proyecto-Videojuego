@@ -81,11 +81,6 @@ public class Nave4{
             if (b.getySpeed() ==0) b.setySpeed(b.getySpeed() + (int)yVel/2);
             yVel = - yVel;
             b.setySpeed(- b.getySpeed());
-            // despegar sprites
-      /*      int cont = 0;
-            while (b.getArea().overlaps(spr.getBoundingRectangle()) && cont<xVel) {
-               spr.setX(spr.getX()+Math.signum(xVel));
-            }   */
         	//actualizar vidas y herir
             vidas--;
             herido = true;
@@ -106,7 +101,6 @@ public class Nave4{
     }
     
     public int getVidas() {return vidas;}
-    //public boolean isDestruida() {return destruida;}
     public int getX() {return (int) spr.getX();}
     public int getY() {return (int) spr.getY();}
 	public void setVidas(int vidas2) {vidas = vidas2;}

@@ -10,9 +10,6 @@ public class CampoAsteroides {
 	
 	private  ArrayList<Ball2> balls1 = new ArrayList<>();
 	private  ArrayList<Ball2> balls2 = new ArrayList<>();
-	//private int cantAsteroides;
-	//private int velXAsteroides; 
-	//private int velYAsteroides;
 	
 	public CampoAsteroides(int cantAsteroides, int velXAsteroides, int velYAsteroides) {
 		Random random = new Random();
@@ -27,6 +24,14 @@ public class CampoAsteroides {
 
 	}
 	
+	public void setBalls1(ArrayList<Ball2> balls1) {
+		this.balls1 = balls1;
+	}
+
+	public void setBalls2(ArrayList<Ball2> balls2) {
+		this.balls2 = balls2;
+	}
+
 	public ArrayList<Ball2> getBalls1() {
 		return balls1;
 	}
