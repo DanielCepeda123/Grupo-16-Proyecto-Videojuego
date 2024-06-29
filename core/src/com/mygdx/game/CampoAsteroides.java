@@ -14,7 +14,6 @@ public class CampoAsteroides {
     private int cantAsteroides;
     private int velXAsteroides; 
     private int velYAsteroides;
-    
     private DirectorAsteroide directorAsteroide;
     private Ball2 bb;
     private BuilderAsteroide asteroideSmall;

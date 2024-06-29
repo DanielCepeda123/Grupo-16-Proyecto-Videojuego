@@ -10,8 +10,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 
-
-
 public class Nave4{
 	
 	private boolean destruida = false;
@@ -25,14 +23,12 @@ public class Nave4{
     private boolean herido = false;
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
-    
     private StrategyDisparo strategyDisparo;
     
-    public Nave4(int x, int y, Sprite sprNave /*Texture tx*/, Sound soundChoque, Texture txBala, Sound soundBala, StrategyDisparo strategyDisparo) {
+    public Nave4(int x, int y, Sprite sprNave, Sound soundChoque, Texture txBala, Sound soundBala, StrategyDisparo strategyDisparo) {
     	sonidoHerido = soundChoque;
     	this.soundBala = soundBala;
     	this.txBala = txBala;
-    	//spr = new Sprite(tx);
     	spr = sprNave;
     	spr.setPosition(x, y);
     	spr.setOriginCenter();
@@ -68,15 +64,7 @@ public class Nave4{
  		 }
         
         // disparo
-        
-        //if(Gdx.input.isKeyJustPressed(Input.Keys.D) && disparoLentoBool == false) strategyDisparo = new DisparoLento(soundBala, txBala, spr, juego);
-        //if(Gdx.input.isKeyJustPressed(Input.Keys.D) && disparoLentoBool == false) strategyDisparo = new DisparoLento(soundBala, txBala, spr, juego);
-        
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {         
-          /*Bullet  bala = new Bullet(spr.getX()+spr.getWidth()/2-5,spr.getY()+ spr.getHeight()-5,0,3,txBala);
-	      juego.agregarBala(bala);
-	      soundBala.play();*/
-        	//DisparoLento disparo = new DisparoLento(soundBala, txBala, spr, juego);
         	strategyDisparo.disparo();
         	
         }

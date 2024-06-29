@@ -8,14 +8,10 @@ import com.badlogic.gdx.math.Rectangle;
 public class Ball2 implements Dibujable {
     private int x;
     private int y;
-    private int xSpeed;
+    private int xSpeed; 
     private int ySpeed;
     private Sprite spr;
     private int size;
-
-    public Ball2() {
-                                    
-    }
 
     public void update() {
         x += getXSpeed();

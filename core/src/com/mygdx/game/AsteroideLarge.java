@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class AsteroideLarge implements BuilderAsteroide{
 	private Ball2 asteroide;
-	Random random = new Random();
+	private Random random = new Random();
 	
 	public AsteroideLarge() {
 		this.asteroide = new Ball2();

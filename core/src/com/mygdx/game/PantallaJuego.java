@@ -17,9 +17,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class PantallaJuego extends PantallaAbstracta {
-
-	//private SpaceNavigation game; //objeto game de clase SpaceNavigation
-	//private OrthographicCamera camera;	
+	
 	private SpriteBatch batch;
 	private int score; //puntaje
 	private int ronda; //cont de rondas
@@ -29,24 +27,19 @@ public class PantallaJuego extends PantallaAbstracta {
 	private CoordinadorSonidos sonidos;
 	private CampoAsteroides campoAsteroides;
 	private ManejoColisiones colisiones;
-	
 	private Nave4 nave;
-	//private  ArrayList<Ball2> balls1 = new ArrayList<>();
-	//private  ArrayList<Ball2> balls2 = new ArrayList<>();
 	private  ArrayList<Bullet> balas = new ArrayList<>();
-
 	private Sound soundBala = Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3"));
     private Texture txBala = new Texture(Gdx.files.internal("Rocket2.png"));
     private Sprite sprNave = new Sprite(new Texture(Gdx.files.internal("MainShip3.png")));
     private PantallaJuego juego = this;
-	
 	private StrategyDisparo strategyDisparo = new DisparoLento(soundBala, txBala, sprNave, juego);
 	private boolean disparoLentoBool = true;
 	
 	public PantallaJuego(SpaceNavigation game, int ronda, int vidas, int score,  
 			int velXAsteroides, int velYAsteroides, int cantAsteroides) {
 		super(game);
-		this.game = game; //Estaba comentado, no se por que. no parece cambiar nada
+		//this.game = game; 
 		this.ronda = ronda;
 		this.score = score;
 		this.velXAsteroides = velXAsteroides;
@@ -96,6 +89,7 @@ public class PantallaJuego extends PantallaAbstracta {
 		      //colisiones entre asteroides y sus rebotes
 		      colisiones.colisionAsteroides(); 
 		     
+		      //Cambia el modo de disparo (Strategy)
 		      if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
 		            if (disparoLentoBool) {
 		                strategyDisparo = new DisparoRapido(soundBala, txBala, sprNave, this);

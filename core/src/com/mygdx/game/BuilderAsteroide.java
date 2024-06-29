@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-interface  BuilderAsteroide {
+interface BuilderAsteroide {
 	
 	void buildVelocidad(int velXAsteroides, int velYAsteroides);
 	void buildSize();
