@@ -4,12 +4,15 @@ import java.util.ArrayList;
 //import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 //import com.badlogic.gdx.audio.Music;
 //import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
@@ -32,11 +35,18 @@ public class PantallaJuego extends PantallaAbstracta {
 	//private  ArrayList<Ball2> balls2 = new ArrayList<>();
 	private  ArrayList<Bullet> balas = new ArrayList<>();
 
-
+	private Sound soundBala = Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3"));
+    private Texture txBala = new Texture(Gdx.files.internal("Rocket2.png"));
+    private Sprite sprNave = new Sprite(new Texture(Gdx.files.internal("MainShip3.png")));
+    private PantallaJuego juego = this;
+	
+	private StrategyDisparo strategyDisparo = new DisparoLento(soundBala, txBala, sprNave, juego);
+	private boolean disparoLentoBool = true;
+	
 	public PantallaJuego(SpaceNavigation game, int ronda, int vidas, int score,  
 			int velXAsteroides, int velYAsteroides, int cantAsteroides) {
 		super(game);
-		//this.game = game;
+		this.game = game; //Estaba comentado, no se por que. no parece cambiar nada
 		this.ronda = ronda;
 		this.score = score;
 		this.velXAsteroides = velXAsteroides;
@@ -50,10 +60,10 @@ public class PantallaJuego extends PantallaAbstracta {
 		sonidos = new CoordinadorSonidos();
 		
 	    // cargar imagen de la nave, 64x64   
-	    nave = new Nave4(Gdx.graphics.getWidth()/2-50,30,new Texture(Gdx.files.internal("MainShip3.png")),
+	    nave = new Nave4(Gdx.graphics.getWidth()/2-50,30, sprNave/*new Texture(Gdx.files.internal("MainShip3.png"))*/,
 	    				Gdx.audio.newSound(Gdx.files.internal("hurt.ogg")), 
-	    				new Texture(Gdx.files.internal("Rocket2.png")), 
-	    				Gdx.audio.newSound(Gdx.files.internal("pop-sound.mp3"))); 
+	    				txBala, 
+	    				soundBala, strategyDisparo); 
         nave.setVidas(vidas);
         //crear asteroides
         campoAsteroides = new CampoAsteroides(cantAsteroides, velXAsteroides, velYAsteroides);
@@ -85,6 +95,16 @@ public class PantallaJuego extends PantallaAbstracta {
 	    	  campoAsteroides.actualizarAsteroides();
 		      //colisiones entre asteroides y sus rebotes
 		      colisiones.colisionAsteroides(); 
+		     
+		      if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+		            if (disparoLentoBool) {
+		                strategyDisparo = new DisparoRapido(soundBala, txBala, sprNave, this);
+		            } else {
+		                strategyDisparo = new DisparoLento(soundBala, txBala, sprNave, this);
+		            }
+		            disparoLentoBool = !disparoLentoBool; // Cambiar el booleano de estrategia
+		            nave.setStrategyDisparo(strategyDisparo); // Actualizar la estrategia en la nave
+		        }
 		      
 	      }
 	      
@@ -97,6 +117,8 @@ public class PantallaJuego extends PantallaAbstracta {
 	      
 	      //dibujar asteroides y manejar colision con nave
 	      colisiones.colisionNaveAsteroide();
+	      
+	      if(Gdx.input.isKeyJustPressed(Input.Keys.D) && disparoLentoBool == false) strategyDisparo = new DisparoLento(soundBala, txBala, sprNave, this);
 	      
 	      if (nave.estaDestruido()) {
   			if (score > game.getHighScore())

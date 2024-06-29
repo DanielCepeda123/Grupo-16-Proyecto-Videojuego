@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
@@ -24,14 +26,18 @@ public class Nave4{
     private int tiempoHeridoMax=50;
     private int tiempoHerido;
     
-    public Nave4(int x, int y, Texture tx, Sound soundChoque, Texture txBala, Sound soundBala) {
+    private StrategyDisparo strategyDisparo;
+    
+    public Nave4(int x, int y, Sprite sprNave /*Texture tx*/, Sound soundChoque, Texture txBala, Sound soundBala, StrategyDisparo strategyDisparo) {
     	sonidoHerido = soundChoque;
     	this.soundBala = soundBala;
     	this.txBala = txBala;
-    	spr = new Sprite(tx);
+    	//spr = new Sprite(tx);
+    	spr = sprNave;
     	spr.setPosition(x, y);
-    	//spr.setOriginCenter();
+    	spr.setOriginCenter();
     	spr.setBounds(x, y, 45, 45);
+    	this.strategyDisparo = strategyDisparo;
 
     }
     public void draw(SpriteBatch batch, PantallaJuego juego){
@@ -60,13 +66,25 @@ public class Nave4{
  		   tiempoHerido--;
  		   if (tiempoHerido<=0) herido = false;
  		 }
+        
         // disparo
+        
+        //if(Gdx.input.isKeyJustPressed(Input.Keys.D) && disparoLentoBool == false) strategyDisparo = new DisparoLento(soundBala, txBala, spr, juego);
+        //if(Gdx.input.isKeyJustPressed(Input.Keys.D) && disparoLentoBool == false) strategyDisparo = new DisparoLento(soundBala, txBala, spr, juego);
+        
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {         
-          Bullet  bala = new Bullet(spr.getX()+spr.getWidth()/2-5,spr.getY()+ spr.getHeight()-5,0,3,txBala);
+          /*Bullet  bala = new Bullet(spr.getX()+spr.getWidth()/2-5,spr.getY()+ spr.getHeight()-5,0,3,txBala);
 	      juego.agregarBala(bala);
-	      soundBala.play();
+	      soundBala.play();*/
+        	//DisparoLento disparo = new DisparoLento(soundBala, txBala, spr, juego);
+        	strategyDisparo.disparo();
+        	
         }
        
+    }
+    
+    public void setStrategyDisparo(StrategyDisparo strategyDisparo) {
+    	this.strategyDisparo = strategyDisparo;
     }
       
     public boolean checkCollision(Ball2 b) {
