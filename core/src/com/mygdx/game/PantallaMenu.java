@@ -9,8 +9,15 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class PantallaMenu extends PantallaAbstracta{
 
+	//private SpaceNavigation game;
+	//private OrthographicCamera camera;
+
 	public PantallaMenu(SpaceNavigation game) {
 		super(game);
+		//this.game = game;
+        
+		/*camera = new OrthographicCamera();
+		camera.setToOrtho(false, 1200, 800);*/
 	}
 
 	@Override
