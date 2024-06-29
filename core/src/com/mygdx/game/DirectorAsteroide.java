@@ -7,10 +7,11 @@ public class DirectorAsteroide { //Clase directora.
 		this.builderAsteroide = builderAsteroide;
 	}
 	
-	public Ball2 construirAsteroide() {
-		builderAsteroide.buildVelocidad();
+	public Ball2 construirAsteroide(int velXAsteroides, int velYAsteroides) {
+		builderAsteroide.buildVelocidad(velXAsteroides, velYAsteroides);
 		builderAsteroide.buildSize();
 		builderAsteroide.buildPosicion();
+		builderAsteroide.buildSprite();
 		return builderAsteroide.getAsteroide();
 	}
 

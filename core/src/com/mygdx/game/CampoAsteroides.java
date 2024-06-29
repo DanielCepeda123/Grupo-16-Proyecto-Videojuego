@@ -14,6 +14,12 @@ public class CampoAsteroides {
     private int cantAsteroides;
     private int velXAsteroides; 
     private int velYAsteroides;
+    
+    private DirectorAsteroide directorAsteroide;
+    private Ball2 bb;
+    private BuilderAsteroide asteroideSmall;
+    private BuilderAsteroide asteroideMedium;
+    private BuilderAsteroide asteroideLarge;
 
     // Constructor privado
     CampoAsteroides(int cantAsteroides, int velXAsteroides, int velYAsteroides) {
@@ -23,10 +29,23 @@ public class CampoAsteroides {
 
         Random random = new Random();
         for (int i = 0; i < cantAsteroides; i++) {
-            Ball2 bb = new Ball2(random.nextInt((int)Gdx.graphics.getWidth()),
-                    50 + random.nextInt((int)Gdx.graphics.getHeight() - 50),
-                    20 + random.nextInt(10), velXAsteroides + random.nextInt(4), velYAsteroides + random.nextInt(4), 
-                    new Texture(Gdx.files.internal("aGreyMedium4.png")));    
+        	directorAsteroide = new DirectorAsteroide();
+        	asteroideSmall = new AsteroideSmall();
+        	asteroideMedium = new AsteroideMedium();
+        	asteroideLarge = new AsteroideLarge();
+        	
+        	if((i % 2 == 0) && (i % 5 == 0)) {
+        		directorAsteroide.setBuilderAsteroide(asteroideLarge);
+        		bb = directorAsteroide.construirAsteroide(velXAsteroides, velYAsteroides);
+        	}else {
+        		if (i % 2 == 0) {
+        		directorAsteroide.setBuilderAsteroide(asteroideMedium);
+        		bb = directorAsteroide.construirAsteroide(velXAsteroides, velYAsteroides);
+        		}else {
+        			directorAsteroide.setBuilderAsteroide(asteroideSmall);
+            		bb = directorAsteroide.construirAsteroide(velXAsteroides, velYAsteroides);
+        		}
+        	}         
             balls1.add(bb);
             balls2.add(bb);
         }

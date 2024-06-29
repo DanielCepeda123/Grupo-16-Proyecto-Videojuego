@@ -11,24 +11,10 @@ public class Ball2 implements Dibujable {
     private int xSpeed;
     private int ySpeed;
     private Sprite spr;
+    private int size;
 
-    public Ball2(int x, int y, int size, int xSpeed, int ySpeed, Texture tx) {
-        spr = new Sprite(tx);
-        this.x = x;
-
-        // Validar que el borde de la esfera no quede fuera
-        if (x - size < 0) this.x = x + size;
-        if (x + size > Gdx.graphics.getWidth()) this.x = x - size;
-
-        this.y = y;
-
-        // Validar que el borde de la esfera no quede fuera
-        if (y - size < 0) this.y = y + size;
-        if (y + size > Gdx.graphics.getHeight()) this.y = y - size;
-
-        spr.setPosition(x, y);
-        this.setXSpeed(xSpeed);
-        this.setySpeed(ySpeed);
+    public Ball2() {
+                                    
     }
 
     public void update() {
@@ -79,6 +65,27 @@ public class Ball2 implements Dibujable {
 
     public void setySpeed(int ySpeed) {
         this.ySpeed = ySpeed;
+    }
+    
+    public void setSize(int size) {
+    	this.size = size;
+    }
+    
+    public void setX(int x) {
+    	this.x = x;
+    	if (x - size < 0) this.x = x + size;
+        if (x + size > Gdx.graphics.getWidth()) this.x = x - size;
+    }
+    
+    public void setY(int y) {
+    	this.y = y;
+    	if (y - size < 0) this.y = y + size;
+        if (y + size > Gdx.graphics.getHeight()) this.y = y - size;
+    }
+    
+    public void setSprite(Sprite spr) {
+    	this.spr = spr;
+    	spr.setPosition(x, y);
     }
 }
 
